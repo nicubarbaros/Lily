@@ -1,18 +1,21 @@
+"use strict";
 // IIFE to wrap code up
 (function(){
 
   // Expose constructor
-  this.Modal = function() {
+  window.Modal = function() {
     
     // Define global elements
     this.closeButton = null;
     this.modal = null;
     this.overlay = null;
 
+    // Determine transition type
     this.transitionEvent = transitionEvent();
+
     // Default options
-    var defaults = {
-      className: "scale",
+    var options = {
+      className: "fade",
       closeButton: true,
       content: " ",
       maxWidth: 800,
@@ -22,15 +25,15 @@
 
     // Create options by mapping defaults units with passed in arguments
     if(arguments[0] && typeof arguments[0] === "object") {
-      this.options = mapDefaults(defaults, arguments[0]);
+      this.options = mapOptions(options, arguments[0]);
     }
 
     //Public Methods
 
     Modal.prototype.close = function() {
       var self = this
-      this.modal.className = this.modal.className.replace("lily--open", "");
-      this.overlay.className = this.overlay.className.replace("lily--open", "");
+      this.modal.className = this.modal.className.replace("lily-open", "");
+      this.overlay.className = this.overlay.className.replace("lily-open", "");
 
       this.modal.addEventListener(this.transitionEvent, function(){
         self.modal.parentNode.removeChild(self.modal);
@@ -44,13 +47,17 @@
       buildModal.call(this);
       eventsInitializer.call(this);
 
-      this.modal.className = this.modal.className + " lily--open";
-      this.overlay.className = this.overlay.className + " lily--open";
+      // Forces the browser to recognize our initial state, and keeps our modal transition,
+      // Otherwise transitions won't work, since we create elements and add class to them.
+      window.getComputedStyle(this.modal).height;
+
+      this.modal.className = this.modal.className + " lily-open";
+      this.overlay.className = this.overlay.className + " lily-open";
     }
 
     // Private methods
     // Map default with users options
-    function mapDefaults(source, props) {
+    function mapOptions(source, props) {
       var prop;
 
       for (prop in props) {
@@ -78,14 +85,14 @@
 
       // Create Modal element
       this.modal = document.createElement("div");
-      this.modal.className = "lily--modal " + this.options.className;
+      this.modal.className = "lily-modal " + this.options.className;
       this.modal.style.maxWidth = this.options.maxWidth + "px";
       this.modal.style.minWidth = this.options.minWidth + "px";
 
       // Add button if true
       if(this.options.closeButton == true) {
         this.closeButton = document.createElement("button");
-        this.closeButton.className = "lily--close " + this.options.className;
+        this.closeButton.className = "lily-close " + this.options.className;
         this.closeButton.innerHTML = "x";
         this.modal.appendChild(this.closeButton);
       }
@@ -93,7 +100,7 @@
       // Add overlay if true
       if(this.options.overlay == true) {
         this.overlay = document.createElement("div");
-        this.overlay.className = "lily--overlay " + this.options.className;
+        this.overlay.className = "lily-overlay " + this.options.className;
         docFrag.appendChild(this.overlay);
       }
 
