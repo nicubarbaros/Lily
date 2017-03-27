@@ -95,7 +95,7 @@ Default: `false`
 Set modal to full window (100vw, 100vh);
 
 #### Classes
-> This is an example of how html is rendered. With the following options you can change almost every class the way you want
+> This is an example of how html is rendered.
 
 ```html
 <div class="lily">
