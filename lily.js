@@ -17,7 +17,7 @@
     var options = {
       className: "fade",
       closeButton: true,
-      maxWidth: 800,
+      maxWidth: 600,
       minWidth: 320,
       overlay: true,
       fullWindow: false,
