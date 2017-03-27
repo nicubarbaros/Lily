@@ -67,6 +67,8 @@ Default: `fade`
 
 The animation class you want to use
 
+___
+
 ##### maxWidth
 Type: `Number`
 
@@ -74,12 +76,16 @@ Default: `600`
 
 Maximum width that the modal can take.
 
+___
+
 ##### minWidth
 Type: `Number`
 
 Default: `320`
 
 Minimum width that the modal can take.
+
+___
 
 ##### fullWindow
 Type: `Boolean`
