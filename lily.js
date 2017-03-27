@@ -20,7 +20,8 @@
       content: " ",
       maxWidth: 800,
       minWidth: 320,
-      overlay: true
+      overlay: true,
+      fullWidth: false,
     }
 
     // Create options by mapping defaults units with passed in arguments
@@ -52,7 +53,8 @@
       window.getComputedStyle(this.modal).height;
 
       this.modal.className = this.modal.className + " lily-open";
-      this.overlay.className = this.overlay.className + " lily-open";
+      if(this.overlay == true)
+        this.overlay.className = this.overlay.className + " lily-open";
     }
 
     // Private methods
@@ -86,8 +88,15 @@
       // Create Modal element
       this.modal = document.createElement("div");
       this.modal.className = "lily-modal " + this.options.className;
-      this.modal.style.maxWidth = this.options.maxWidth + "px";
-      this.modal.style.minWidth = this.options.minWidth + "px";
+      if(this.options.fullWidth == false) {
+        this.modal.style.maxWidth = this.options.maxWidth + "px";
+        this.modal.style.minWidth = this.options.minWidth + "px";
+      }
+
+      else {
+        this.modal.style.width = "100vw";
+        this.modal.style.height = "100vh";
+      }
 
       // Add button if true
       if(this.options.closeButton == true) {
