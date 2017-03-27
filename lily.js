@@ -24,6 +24,13 @@
       fullWindow: false,
     }
 
+    // Private params
+    var lily = {
+      lilyWrapper: null,
+      viewPortWith: "100vw",
+      viewPortHeight: "100vh"
+    }
+
     // Create options by mapping defaults units with passed in arguments
     if(arguments[0] && typeof arguments[0] === "object") {
       this.options = mapOptions(options, arguments[0]);
@@ -36,7 +43,11 @@
       this.modal.className = this.modal.className.replace("lily-open", "");
       this.modal.addEventListener(this.transitionEvent, function(){
         self.modal.parentNode.removeChild(self.modal);
+
+        // Remove lilyWrapper as well
+        lily.lilyWrapper.parentNode.removeChild(lily.lilyWrapper);
       })
+      
       
       if(this.options.overlay == true) {
         this.overlay.className = this.overlay.className.replace("lily-open", "");
@@ -53,7 +64,7 @@
       if(this.options.fullWindow == true) {
         this.options.overlay = false;
       }
-      
+
       buildModal.call(this);
       eventsInitializer.call(this);
 
@@ -94,17 +105,21 @@
       // Create a DocumentFrag
       docFrag = document.createDocumentFragment();
 
+      // Create lily element
+      lily.lilyWrapper = document.createElement("div");
+      lily.lilyWrapper.className = "lily";
+
       // Create Modal element
       this.modal = document.createElement("div");
       this.modal.className = "lily-modal " + this.options.className;
       if(this.options.fullWindow == false) {
-        this.modal.style.maxWidth = this.options.maxWidth + "px";
+        this.modal.style.width = this.options.maxWidth + "px";
         this.modal.style.minWidth = this.options.minWidth + "px";
       }
 
       else {
-        this.modal.style.width = "100vw";
-        this.modal.style.height = "100vh";
+        this.modal.style.width = lily.viewPortWith;
+        this.modal.style.height = lily.viewPortHeight;
       }
 
       // Add button if true
@@ -119,7 +134,9 @@
       if(this.options.overlay == true) {
         this.overlay = document.createElement("div");
         this.overlay.className = "lily-overlay " + this.options.className;
-        docFrag.appendChild(this.overlay);
+
+        // Append overlay to lily
+        lily.lilyWrapper.appendChild(this.overlay);
       }
 
       //Create content and append to modal
@@ -128,8 +145,11 @@
       contentHolder.innerHTML = content;
       this.modal.appendChild(contentHolder);
 
+      // Append modal to lily
+      lily.lilyWrapper.appendChild(this.modal);
+
       // Append modal to DocumentFragment
-      docFrag.appendChild(this.modal);
+      docFrag.appendChild(lily.lilyWrapper);
 
       // Append DocumentFragment to body
       document.body.appendChild(docFrag);

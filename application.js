@@ -1,5 +1,4 @@
 var myContent = document.getElementById('content');
-
 var modal = new Modal({
   content: myContent,
   fullWindow: true
