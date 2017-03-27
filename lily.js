@@ -34,20 +34,26 @@
     Modal.prototype.close = function() {
       var self = this
       this.modal.className = this.modal.className.replace("lily-open", "");
-
-      if(this.overlay == true)
-        this.overlay.className = this.overlay.className.replace("lily-open", "");
-
       this.modal.addEventListener(this.transitionEvent, function(){
         self.modal.parentNode.removeChild(self.modal);
       })
-
-      if(this.overlay == true)
+      
+      if(this.options.overlay == true) {
+        this.overlay.className = this.overlay.className.replace("lily-open", "");
+        
         this.overlay.addEventListener(this.transitionEvent, function(){
           self.overlay.parentNode.removeChild(self.overlay);
         })
+      }
     }
+
     Modal.prototype.open = function() {
+
+      // We don't need an overlay if modal is fullWindow
+      if(this.options.fullWindow == true) {
+        this.options.overlay = false;
+      }
+      
       buildModal.call(this);
       eventsInitializer.call(this);
 
@@ -56,7 +62,8 @@
       window.getComputedStyle(this.modal).height;
 
       this.modal.className = this.modal.className + " lily-open";
-      if(this.overlay == true)
+
+      if(this.options.overlay == true)
         this.overlay.className = this.overlay.className + " lily-open";
     }
 
@@ -70,7 +77,6 @@
           source[prop] = props[prop];
         }
       }
-
       return source;
     }
 
