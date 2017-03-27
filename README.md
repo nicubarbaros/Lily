@@ -97,6 +97,7 @@ Set modal to full window (100vw, 100vh);
 #### Classes
 > This is an example of how html is rendered. With the following options you can change almost every class the way you want
 
+```html
 <div class="lily">
   <div class="lily-overlay fade lily-open"></div>
   <div class="lily-modal fade lily-open">
@@ -104,7 +105,7 @@ Set modal to full window (100vw, 100vh);
     <div id="lily-content">...</div>
   </div> 
 </div>
-
+```
 
 ## Contributing
 _toDO
