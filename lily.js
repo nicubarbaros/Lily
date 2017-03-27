@@ -21,7 +21,7 @@
       maxWidth: 800,
       minWidth: 320,
       overlay: true,
-      fullWidth: false,
+      fullWindow: false,
     }
 
     // Create options by mapping defaults units with passed in arguments
@@ -34,15 +34,18 @@
     Modal.prototype.close = function() {
       var self = this
       this.modal.className = this.modal.className.replace("lily-open", "");
-      this.overlay.className = this.overlay.className.replace("lily-open", "");
+
+      if(this.overlay == true)
+        this.overlay.className = this.overlay.className.replace("lily-open", "");
 
       this.modal.addEventListener(this.transitionEvent, function(){
         self.modal.parentNode.removeChild(self.modal);
       })
 
-      this.overlay.addEventListener(this.transitionEvent, function(){
-        self.overlay.parentNode.removeChild(self.overlay);
-      })
+      if(this.overlay == true)
+        this.overlay.addEventListener(this.transitionEvent, function(){
+          self.overlay.parentNode.removeChild(self.overlay);
+        })
     }
     Modal.prototype.open = function() {
       buildModal.call(this);
@@ -88,7 +91,7 @@
       // Create Modal element
       this.modal = document.createElement("div");
       this.modal.className = "lily-modal " + this.options.className;
-      if(this.options.fullWidth == false) {
+      if(this.options.fullWindow == false) {
         this.modal.style.maxWidth = this.options.maxWidth + "px";
         this.modal.style.minWidth = this.options.minWidth + "px";
       }
