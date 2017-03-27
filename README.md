@@ -58,28 +58,32 @@ modal.close(); //close modal
 
 #### Options
 
-List including all options 
+> List including all options 
 
 ##### className
 Type: `String`
+
 Default: `fade`
 
 The animation class you want to use
 
 ##### maxWidth
 Type: `Number`
+
 Default: `600`
 
 Maximum width that the modal can take.
 
 ##### minWidth
 Type: `Number`
+
 Default: `320`
 
 Minimum width that the modal can take.
 
 ##### fullWindow
 Type: `Boolean`
+
 Default: `false`
 
 Set modal to full window (100vw, 100vh);
