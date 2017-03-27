@@ -28,7 +28,6 @@ _toDo
 
 ### Usage
 
-<<<<<<< HEAD
 Create a new object and call the plugin function and your modal is ready.
 
 ```javascript
