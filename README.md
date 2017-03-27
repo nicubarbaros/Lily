@@ -58,7 +58,7 @@ modal.close(); //close modal
 
 #### Options
 
-> List including all options 
+> List including all options available for you to use.
 
 ##### className
 Type: `String`
@@ -74,7 +74,7 @@ Type: `Number`
 
 Default: `600`
 
-Maximum width that the modal can take.
+Maximum width the modal can take.
 
 ___
 
@@ -83,7 +83,7 @@ Type: `Number`
 
 Default: `320`
 
-Minimum width that the modal can take.
+Minimum width the modal can take.
 
 ___
 
