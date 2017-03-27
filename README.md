@@ -1,6 +1,6 @@
 # Lily is currently under development
 
-New features are being released each day.
+_toDo
 
 ## Lily
 
@@ -13,6 +13,7 @@ Plugin that lets you create modals, fast and easy.
 This package can be installed with:
 
 _toDo
+
 Bower, npm
 
 

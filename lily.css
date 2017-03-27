@@ -71,6 +71,9 @@
             transition: 0.5s opacity ease;
 }
 
-#content {
+.lily-modal>#lily-content{
+  display: block;
+}
+#lily-content {
   display: none;
 }

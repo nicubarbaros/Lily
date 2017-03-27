@@ -17,7 +17,6 @@
     var options = {
       className: "fade",
       closeButton: true,
-      content: " ",
       maxWidth: 800,
       minWidth: 320,
       overlay: true,
@@ -27,6 +26,8 @@
     // Private params
     var lily = {
       lilyWrapper: null,
+      lilyContent: null,
+      parentNode: null,
       viewPortWith: "100vw",
       viewPortHeight: "100vh"
     }
@@ -40,7 +41,11 @@
 
     Modal.prototype.close = function() {
       var self = this
+      window.getComputedStyle(this.modal).height;
       this.modal.className = this.modal.className.replace("lily-open", "");
+  
+      lily.parentNode.appendChild(this.modal.querySelector("#lily-content"));
+
       this.modal.addEventListener(this.transitionEvent, function(){
         self.modal.parentNode.removeChild(self.modal);
 
@@ -73,7 +78,6 @@
       window.getComputedStyle(this.modal).height;
 
       this.modal.className = this.modal.className + " lily-open";
-
       if(this.options.overlay == true)
         this.overlay.className = this.overlay.className + " lily-open";
     }
@@ -92,15 +96,7 @@
     }
 
     function buildModal() {
-      var content, docFrag, contentHolder;
-
-      if(typeof this.options.content ==="string"){
-        content = this.options.content;
-      }
-
-      else {
-        content = this.options.content.innerHTML;
-      }
+      var docFrag;
 
       // Create a DocumentFrag
       docFrag = document.createDocumentFragment();
@@ -124,12 +120,11 @@
 
       // Add button if true
       if(this.options.closeButton == true) {
-        this.closeButton = document.createElement("button");
+        this.closeButton = document.createElement("div");
         this.closeButton.className = "lily-close " + this.options.className;
         this.closeButton.innerHTML = "x";
         this.modal.appendChild(this.closeButton);
       }
-
       // Add overlay if true
       if(this.options.overlay == true) {
         this.overlay = document.createElement("div");
@@ -139,14 +134,13 @@
         lily.lilyWrapper.appendChild(this.overlay);
       }
 
-      //Create content and append to modal
-      contentHolder = document.createElement("div");
-      contentHolder.className = "lily-content";
-      contentHolder.innerHTML = content;
-      this.modal.appendChild(contentHolder);
-
+      lily.lilyContent = document.getElementById('lily-content');
+      lily.parentNode = lily.lilyContent.parentNode;
+  
+      addParent(lily.lilyContent, this.modal);
       // Append modal to lily
       lily.lilyWrapper.appendChild(this.modal);
+
 
       // Append modal to DocumentFragment
       docFrag.appendChild(lily.lilyWrapper);
@@ -172,6 +166,14 @@
       if(el.style.OTransition) return "oTransitionEnd";
       if(el.style.WebkitTransition) return "webkitTransitionEnd";
       return "transitionend";
+    }
+
+    function addParent(element, newParent) {
+      var parent = element.parentNode;
+      // set the wrapper as child (instead of the element)
+      parent.replaceChild(newParent, element);
+      // set element as child of wrapper
+      newParent.appendChild(element)
     }
   }
 
