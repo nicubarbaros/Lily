@@ -9,17 +9,17 @@ var getVersion = function () {
 };
 
 gulp.task('minify-js', function () {
-    gulp.src('./lily.js')
+    gulp.src('./dist/lily.js')
     .pipe(uglify({preserveComments:'some'}))
     .pipe(concat('lily.min.js'))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('minify-css', function() {
-  gulp.src('./lily.css')
+  gulp.src('./dist/assets/lily.css')
   .pipe(cleanCSS({compatibility: 'ie8'}))
   .pipe(concat('lily.min.css'))
-  .pipe(gulp.dest('./'));
+  .pipe(gulp.dest('./dist/assets/'));
 })
 
 gulp.task('default', ['minify-js', 'minify-css']);
