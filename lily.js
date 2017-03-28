@@ -44,11 +44,12 @@
       window.getComputedStyle(this.modal).height;
       this.modal.className = this.modal.className.replace("lily-open", "");
   
-      lily.parentNode.appendChild(this.modal.querySelector("#lily-content"));
+      
 
       this.modal.addEventListener(this.transitionEvent, function(){
         self.modal.parentNode.removeChild(self.modal);
 
+        lily.parentNode.appendChild(self.modal.querySelector("#lily-content"));
         // Remove lilyWrapper as well
         lily.lilyWrapper.parentNode.removeChild(lily.lilyWrapper);
       })
